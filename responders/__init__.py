@@ -1,0 +1,2 @@
+from responders.stemming_responder import StemmingResponder
+from responders.voorzitter_responder import VoorzitterResponder
