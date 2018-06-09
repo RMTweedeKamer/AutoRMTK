@@ -9,7 +9,7 @@ class StemmingResponder(Responder):
             return False
         if len([1 for c in comment.replies.list() if "meta" in c.body.lower()]) > 0:
             return False
-        if not re.match(r'([A-Z]{1,2}[0-9]{4}\-?[A-Za-z0-9]*\:\ *\w+)', comment.body):
+        if not re.findall(r'([A-Z]{1,2}[0-9]{4}\-?[A-Za-z0-9]*\:\ *\w+)', comment.body):
             return False
 
         return comment.submission.link_flair_text in [
@@ -38,31 +38,31 @@ class StemmingResponder(Responder):
             'incorrect_keyword': incorrect_keyword
         }
 
-        def get_format(self, body: string) -> set:
-            """
-            >>> body = 'Leden van de Tweede Kamer der Staten-Generaal,U kunt op de volgende moties en wetten uw stem uitbrengen:W0309: Motie tot inkorting appa-uitkeringKS0310: Motie tot differentiatie aan brengen in de titelatuur van bachelors op het HBO en de universiteitM0311: Motie tegen Bendelaars (bendebedelaarsproblematiek)Hanteer a.u.b. het volgende format:Telkens met twee spaties achter de regelVoor/Tegen/Onthouden:W0309:KS0310:M0311:'
-            >>> get_format(body) == {'M0311', 'W0309', 'KS0310'}
-            True
-            """
-            return set(get_votes(body).keys())
+    def get_format(self, body: str) -> set:
+        """
+        >>> body = 'Leden van de Tweede Kamer der Staten-Generaal,U kunt op de volgende moties en wetten uw stem uitbrengen:W0309: Motie tot inkorting appa-uitkeringKS0310: Motie tot differentiatie aan brengen in de titelatuur van bachelors op het HBO en de universiteitM0311: Motie tegen Bendelaars (bendebedelaarsproblematiek)Hanteer a.u.b. het volgende format:Telkens met twee spaties achter de regelVoor/Tegen/Onthouden:W0309:KS0310:M0311:'
+        >>> get_format(body) == {'M0311', 'W0309', 'KS0310'}
+        True
+        """
+        return set(re.findall(r'([A-Z]{1,2}[0-9]{4}\-?[A-Za-z0-9]*)', body))
 
-        def vote_value(self, vote: string) -> int:
-            """
-            >>> vote_value('VOOR') == 1
-            True
-            >>> vote_value('onthouden') == 0
-            True
-            >>> vote_value('Tegen') == -1
-            True
-            >>> vote_value('random') == None
-            True
-            """
-            return {'voor': 1, 'onthouden': 0, 'tegen': -1}.get(vote.lower())
+    def vote_value(self, vote: str) -> int:
+        """
+        >>> vote_value('VOOR') == 1
+        True
+        >>> vote_value('onthouden') == 0
+        True
+        >>> vote_value('Tegen') == -1
+        True
+        >>> vote_value('random') == None
+        True
+        """
+        return {'voor': 1, 'onthouden': 0, 'tegen': -1}.get(vote.lower())
 
-        def get_votes(self, body: string) -> dict:
-            votes = re.findall(r'([A-Z]{1,2}[0-9]{4}\-?[A-Za-z0-9]*\:\ *\w+)', body)
-            votes = [re.search(r'([A-Z]{1,2}[0-9]{4}\-?[A-Za-z0-9]*)\:\ *(\w+)', vote, re.IGNORECASE) for vote in votes]
-            votes = [[vote.group(1).upper(), vote_value(vote.group(2))] for vote in votes if vote != None]
+    def get_votes(self, body: str) -> dict:
+        votes = re.findall(r'([A-Z]{1,2}[0-9]{4}\-?[A-Za-z0-9]*\:\ *\w+)', body)
+        votes = [re.search(r'([A-Z]{1,2}[0-9]{4}\-?[A-Za-z0-9]*)\:\ *(\w+)', vote, re.IGNORECASE) for vote in votes]
+        votes = [[vote.group(1).upper(), self.vote_value(vote.group(2))] for vote in votes if vote != None]
 
-            return dict(votes)
+        return dict(votes)
 
