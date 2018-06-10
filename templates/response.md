@@ -1,9 +1,8 @@
 Beste,
 
-Er zijn een aantal dingen mis met uw reactie. Zou u naar hetvolgende willenn kijken? (tip: als u 'meta' in uw reactie plaatst, zal ik uw reactie niet valideren)
+Er zijn een aantal dingen mis met uw reactie. Zou u naar hetvolgende willen kijken? (tip: als u 'meta' in uw reactie plaatst, zal ik uw reactie niet valideren)
 
 *****
-
 {% for response in rendered_responses %}
 
 {{ response }}

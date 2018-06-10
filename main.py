@@ -10,7 +10,10 @@ def main():
     ]
 
     for comment in reddit.client().subreddit('rmtk').stream.comments():
-        comment.refresh()
+        try:
+            comment.refresh()
+        except Exception as e:
+            continue
 
         if "meta" in comment.body.lower() or comment.body == '[deleted]':
             continue
