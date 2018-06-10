@@ -1,12 +1,15 @@
 import reddit
 from jinja2 import Template
 
-from responders import VoorzitterResponder, StemmingResponder
+from responders import VoorzitterResponder, StemmingResponder, EKResponder, EKTKResponder, TKResponder
 
 def main():
     responders = [
-      VoorzitterResponder(),
-      StemmingResponder()
+        VoorzitterResponder(),
+        StemmingResponder(),
+        EKResponder(),
+        EKTKResponder(),
+        TKResponder()
     ]
 
     for comment in reddit.client().subreddit('rmtk').stream.comments():

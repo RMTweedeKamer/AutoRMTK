@@ -1,2 +1,5 @@
 from responders.stemming_responder import StemmingResponder
 from responders.voorzitter_responder import VoorzitterResponder
+from responders.ek_responder import EKResponder
+from responders.ektk_responder import EKTKResponder
+from responders.tk_responder import TKResponder
