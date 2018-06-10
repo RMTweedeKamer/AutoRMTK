@@ -1,7 +1,7 @@
 Er zijn fouten opgetreden bij het uitbrengen van uw stem:
 
 {% if not_voted_on %}
-U hebt namelijk niet gestemd op: _{{ not_voted_on|sort|join(', ') }}_.
+U hebt namelijk niet gestemd op: _{{ not_voted_on|join(', ') }}_.
 
 Let u even op dat er geen hoofdletter 'o' wordt gebruikt in plaats van een nul.
 {% endif %}

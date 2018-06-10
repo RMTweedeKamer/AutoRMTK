@@ -57,7 +57,16 @@ class StemmingResponder(Responder):
         >>> vote_value('random') == None
         True
         """
-        return {'voor': 1, 'onthouden': 0, 'tegen': -1}.get(vote.lower())
+        vote = vote.lower()
+
+        if 'voor' in vote:
+            return 1
+        if 'onthoud' in vote:
+            return 0
+        if 'tegen' in vote:
+            return -1
+
+        return None
 
     def get_votes(self, body: str) -> dict:
         votes = re.findall(r'([A-Z]{1,2}[0-9]{4}\-?[A-Za-z0-9]*\:\ *\w+)', body)

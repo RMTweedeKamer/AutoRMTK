@@ -4,7 +4,7 @@ import reddit
 from vcr_unittest import VCRTestCase
 from responders import StemmingResponder
 
-class TestVoorzitterResponder(VCRTestCase):
+class TestStemmingResponder(VCRTestCase):
     def test_follows_format1(self):
         comment = reddit.client().comment(id="dzpm1ak")
         response = StemmingResponder().respond(comment)
@@ -12,6 +12,11 @@ class TestVoorzitterResponder(VCRTestCase):
 
     def test_follows_format2(self):
         comment = reddit.client().comment(id="dzrpx9y")
+        response = StemmingResponder().respond(comment)
+        self.assertIsNone(response)
+
+    def test_follows_format2(self):
+        comment = reddit.client().comment(id="e041767")
         response = StemmingResponder().respond(comment)
         self.assertIsNone(response)
 
@@ -85,17 +90,6 @@ class TestVoorzitterResponder(VCRTestCase):
             'not_voted_on': {'M0295'},
             'incorrect_keyword': set()
         })
-
-    def test_incorrect_keyword1(self):
-        comment = reddit.client().comment(id="dsvimxl")
-        response = StemmingResponder().respond(comment)
-        self.assertDictEqual(response, {
-            'template': 'stemming',
-            'not_in_voting': set(),
-            'not_voted_on': set(),
-            'incorrect_keyword': {'M0285'}
-        })
-
 
 if __name__ == '__main__':
     unittest.main()

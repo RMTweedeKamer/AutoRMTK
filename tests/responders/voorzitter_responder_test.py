@@ -10,5 +10,10 @@ class TestVoorzitterResponder(VCRTestCase):
         response = VoorzitterResponder().respond(comment)
         self.assertIsNone(response)
 
+    def test_dont_respond_op(self):
+        comment = reddit.client().comment(id="e0fabk6")
+        response = VoorzitterResponder().respond(comment)
+        self.assertIsNone(response)
+
 if __name__ == '__main__':
     unittest.main()

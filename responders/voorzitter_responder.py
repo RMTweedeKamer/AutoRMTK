@@ -5,7 +5,10 @@ import submission_types
 class VoorzitterResponder(Responder):
     def should_respond(self, comment: Comment) -> bool:
         if "voorzitter" in comment.body.lower():
-          return False
+            return False
+
+        if comment.submission.author.name == comment.author.name:
+            return False
 
         return comment.submission.link_flair_text in [
             submission_types.WETSVOORSTEL, submission_types.UITSLAGEN,
