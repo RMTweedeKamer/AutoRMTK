@@ -11,4 +11,4 @@ Er zijn een aantal dingen mis met uw reactie. Zou u naar hetvolgende willen kijk
 
 {% endfor %}
 
-Ik ben een bot. Voor vagen, PM mijn maker /u/-___-_.
+Ik ben een bot. Voor vragen, PM mijn maker /u/-___-_.
