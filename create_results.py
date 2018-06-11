@@ -9,6 +9,7 @@ def main():
   text = Template(open('templates/submissions/resultaten.md').read()).render(results)
 
   reddit.client().redditor('-___-_').message(results['title'], text)
+  reddit.client().subreddit('rmtk').message(results['title'], text)
 
 if __name__ == "__main__":
     try:
