@@ -7,7 +7,12 @@ class EKTKResponder(Responder):
         if comment.submission.author.name == comment.author.name:
             return False
 
-        return comment.submission.link_flair_text == submission_types.EK_TK_STEMMING
+        return comment.submission.link_flair_text not in [
+            submission_types.VERENIGDE_NATIES,
+            submission_types.EUROPESE_UNIE,
+            submission_types.PARLEMENT,
+            submission_types.META
+        ]
 
     def respond(self, comment: Comment):
         if not self.should_respond(comment):
