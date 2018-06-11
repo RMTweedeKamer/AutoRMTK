@@ -58,6 +58,9 @@ class TestSubmissionTypes(VCRTestCase):
     def test_wetsvoorstel(self):
         self.assert_flair_being_used(submission_types.WETSVOORSTEL)
 
+    def test_ek_debat(self):
+        self.assert_flair_being_used(submission_types.EK_DEBAT)
+
     def assert_flair_being_used(self, flair):
         submissions = reddit.client().subreddit('rmtk').search('flair:"' + flair + '"', limit=1)
         self.assertEqual(len(list(submissions)), 1, msg=flair)

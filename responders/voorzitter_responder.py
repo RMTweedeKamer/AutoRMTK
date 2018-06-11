@@ -15,7 +15,8 @@ class VoorzitterResponder(Responder):
             submission_types.PETITIE, submission_types.EUROPESE_UNIE,
             submission_types.REFERENDUM, submission_types.DEBAT,
             submission_types.KAMERSTUK, submission_types.VERENIGDE_NATIES,
-            submission_types.KONINKLIJK_BESLUIT, submission_types.MOTIE
+            submission_types.KONINKLIJK_BESLUIT, submission_types.MOTIE,
+            submission_types.EK_DEBAT
         ]
 
     def respond(self, comment: Comment):
