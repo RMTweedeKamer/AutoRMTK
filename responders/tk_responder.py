@@ -16,6 +16,4 @@ class TKResponder(Responder):
         if comment.author.name.lower() in self.kamerleden()['tweedeKamer']:
             return None
 
-        import code; code.interact(local=dict(globals(), **locals()))
-
         return {'template': 'tk'}
