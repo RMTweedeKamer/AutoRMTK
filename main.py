@@ -52,5 +52,3 @@ if __name__ == "__main__":
 
         client = Client(os.getenv('SENTRY_URL'))
         client.captureException()
-
-
