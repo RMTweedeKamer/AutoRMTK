@@ -1,5 +1,6 @@
 from praw.models import Submission, Comment
 from responders import StemmingResponder
+from helpers import StemmingHelper
 from datetime import datetime
 import re
 import submission_types
@@ -20,16 +21,16 @@ class ResultatenSubmisser():
         return counted_votes[1] > counted_votes[-1]
 
     def submiss(self, stemming: Submission):
-        voteables = sorted(StemmingResponder().get_format(stemming.selftext))
+        voteables = sorted(StemmingHelper.get_format(stemming.selftext))
         votes = {v: {-1: 0, 0: 0, 1: 0} for v in voteables}
         user_votes = [
-          c for c in stemming.comments if StemmingResponder().get_format(c.body) != set()
+          c for c in stemming.comments if StemmingHelper.get_format(c.body) != set()
         ]
         valid_user_votes = [
           uv for uv in user_votes if self.comment_valid(uv)
         ]
         parsed_user_votes = [
-          StemmingResponder().get_votes(vuv.body) for vuv in valid_user_votes
+          StemmingHelper.get_votes(vuv.body) for vuv in valid_user_votes
         ]
 
         for vote in parsed_user_votes:
