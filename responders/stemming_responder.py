@@ -10,7 +10,7 @@ class StemmingResponder(Responder):
             return False
         if len([1 for c in comment.replies.list() if "meta" in c.body.lower()]) > 0:
             return False
-        if not re.findall(r'([A-Z]{1,2}[0-9]{4}\-?[A-Za-z0-9]*\:\ *\w+)', comment.body):
+        if not re.findall(r'([A-Z]{1,2}[0-9]{4}\-?[A-Za-z0-9]*\:\ *\w+)', comment.body or ""):
             return False
 
         return comment.submission.link_flair_text in [

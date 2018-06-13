@@ -8,7 +8,7 @@ class StemmingHelper(object):
         >>> get_format(body) == {'M0311', 'W0309', 'KS0310'}
         True
         """
-        return set(re.findall(r'([A-Z]{1,2}[0-9]{4}\-?[A-Za-z0-9]*)', body))
+        return set(re.findall(r'([A-Z]{1,2}[0-9]{4}\-?[A-Za-z0-9]*)', body or ""))
 
     @staticmethod
     def vote_value(vote: str) -> int:
@@ -35,7 +35,7 @@ class StemmingHelper(object):
 
     @staticmethod
     def get_votes(body: str) -> dict:
-        votes = re.findall(r'([A-Z]{1,2}[0-9]{4}\-?[A-Za-z0-9]*\:\ *\w+)', body)
+        votes = re.findall(r'([A-Z]{1,2}[0-9]{4}\-?[A-Za-z0-9]*\:\ *\w+)', body or "")
         votes = [re.search(r'([A-Z]{1,2}[0-9]{4}\-?[A-Za-z0-9]*)\:\ *(\w+)', vote, re.IGNORECASE) for vote in votes]
         votes = [[vote.group(1).upper(), StemmingHelper.vote_value(vote.group(2))] for vote in votes if vote != None]
 

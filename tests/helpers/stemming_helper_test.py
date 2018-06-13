@@ -22,6 +22,8 @@ class TestStemmingHelper(VCRTestCase):
             'M0303', 'M0304', 'M0305', 'M0306', 'M0307', 'M0308', 'W0124'
         })
 
+    def test_get_vote_format_with_none(self):
+        self.assertEqual(StemmingHelper.get_format(None), set())
 
     def test_get_votes1(self):
         comment = reddit.client().comment(id="dzo84wk")
@@ -49,6 +51,9 @@ class TestStemmingHelper(VCRTestCase):
             'M0284': 0,
             'M0285': 1
         })
+
+    def test_get_votes_with_none(self):
+        self.assertEqual(StemmingHelper.get_votes(None), {})
 
 if __name__ == '__main__':
     unittest.main()
