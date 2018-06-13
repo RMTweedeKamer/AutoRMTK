@@ -4,6 +4,7 @@ from helpers import StemmingHelper
 from datetime import datetime
 import re
 import submission_types
+from helpers import KamerledenHelper
 
 class ResultatenSubmisser():
     def kamerstuk_submission(title):
@@ -13,9 +14,9 @@ class ResultatenSubmisser():
 
     def kamerleden_amount(self, flair: str) -> int:
         if flair == submission_types.EK_STEMMING:
-            return len(StemmingResponder().kamerleden()['eersteKamer'])
+            return len(KamerledenHelper.eerste_kamerleden())
         elif flair == submission_types.TK_STEMMING:
-            return len(StemmingResponder().kamerleden()['tweedeKamer'])
+            return len(KamerledenHelper.tweede_kamerleden())
 
     def decide_if_through(self, counted_votes: dict) -> bool:
         return counted_votes[1] > counted_votes[-1]

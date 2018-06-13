@@ -1,6 +1,7 @@
 from responders.responder import Responder
 from praw.models import Comment
 import submission_types
+from helpers import KamerledenHelper
 
 class EKTKResponder(Responder):
     def should_respond(self, comment: Comment) -> bool:
@@ -13,10 +14,10 @@ class EKTKResponder(Responder):
         if not self.should_respond(comment):
             return None
 
-        if comment.author.name.lower() in self.kamerleden()['tweedeKamer']:
+        if comment.author.name.lower() in KamerledenHelper.tweede_kamerleden():
             return None
 
-        if comment.author.name.lower() in self.kamerleden()['eersteKamer']:
+        if comment.author.name.lower() in KamerledenHelper.eerste_kamerleden():
             return None
 
         return {'template': 'ek_tk'}

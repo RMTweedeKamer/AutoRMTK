@@ -1,6 +1,7 @@
 from responders.responder import Responder
 from praw.models import Comment
 import submission_types
+from helpers import KamerledenHelper
 
 class TKResponder(Responder):
     def should_respond(self, comment: Comment) -> bool:
@@ -13,7 +14,7 @@ class TKResponder(Responder):
         if not self.should_respond(comment):
             return None
 
-        if comment.author.name.lower() in self.kamerleden()['tweedeKamer']:
+        if comment.author.name.lower() in KamerledenHelper.tweede_kamerleden():
             return None
 
         return {'template': 'tk'}
