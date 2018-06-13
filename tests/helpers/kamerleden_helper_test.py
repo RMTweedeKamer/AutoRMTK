@@ -2,7 +2,7 @@ import unittest
 from vcr_unittest import VCRTestCase
 from helpers import KamerledenHelper
 
-class TestStemmingHelper(VCRTestCase):
+class TestKamerledenHelper(VCRTestCase):
     def test_eerste_kamerleden(self):
         kamerleden = KamerledenHelper.eerste_kamerleden()
         self.assertEqual(len(kamerleden), 8)

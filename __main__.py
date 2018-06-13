@@ -1,0 +1,9 @@
+from tests.submission_types_test import TestSubmissionTypes
+
+from tests.responders.stemming_responder_test import TestStemmingResponder
+from tests.responders.voorzitter_responder_test import TestVoorzitterResponder
+
+from tests.submissers.resultaten_submisser_test import TestResultatenSubmisser
+
+from tests.helpers.kamerleden_helper_test import TestKamerledenHelper
+from tests.helpers.stemming_helper_test import TestStemmingHelper
