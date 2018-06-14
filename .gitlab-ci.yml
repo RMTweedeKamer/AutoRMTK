@@ -2,6 +2,10 @@ image: python:3.6.5
 
 before_script:
   - pip install -r requirements.txt
+  - mkdir -p ~/.ssh
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
+  - ssh-keyscan -H '167.99.210.104' >> ~/.ssh/known_hosts
 
 stages:
   - test
@@ -16,7 +20,6 @@ deploy:
   stage: deploy
   type: deploy
   script:
-    - gem install dpl
-    - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_API_KEY
+    - git push dokku@167.99.210.104:autormtk master
   only:
     - master
