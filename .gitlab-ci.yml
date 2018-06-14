@@ -1,5 +1,12 @@
 image: python:3.6.5
 
+cache:
+  folders:
+    - tests/cassettes
+    - tests/helpers/cassettes
+    - tests/responders/cassettes
+    - tests/submissers/cassettes
+
 before_script:
   - pip install -r requirements.txt
   - mkdir -p ~/.ssh
