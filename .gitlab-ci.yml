@@ -18,7 +18,7 @@ stages:
 test:
   stage: test
   script:
-    - python -munittest tests/**/**.py
+    - python -munittest tests/*.py tests/*/*.py
 
 deploy:
   stage: deploy
