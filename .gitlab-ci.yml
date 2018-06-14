@@ -6,9 +6,10 @@ cache:
     - tests/helpers/cassettes
     - tests/responders/cassettes
     - tests/submissers/cassettes
+    - .pip
 
 before_script:
-  - pip install -r requirements.txt
+  - pip --cache-dir=.pip install -r requirements.txt
   - mkdir -p ~/.ssh
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
   - chmod 600 ~/.ssh/id_rsa
