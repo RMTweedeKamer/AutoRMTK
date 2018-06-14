@@ -22,6 +22,8 @@ def main():
             continue
         if [1 for c in comment.replies.list() if c and c.author.name == 'AutoRMTK']:
             continue
+        if comment.author.name in ['AutoRMTK', 'AutoModerator']:
+            continue
 
         responses = [response for response in
           [responder.respond(comment) for responder in responders] if response != None]
