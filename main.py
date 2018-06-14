@@ -18,9 +18,9 @@ def main():
         except Exception as e:
             continue
 
-        if "meta" in comment.body.lower() or comment.body == '[deleted]':
+        if command.body and ("meta" in comment.body.lower() or comment.body == '[deleted]'):
             continue
-        if [1 for c in comment.replies.list() if c.author.name == 'AutoRMTK']:
+        if [1 for c in comment.replies.list() if c and c.author.name == 'AutoRMTK']:
             continue
 
         responses = [response for response in
