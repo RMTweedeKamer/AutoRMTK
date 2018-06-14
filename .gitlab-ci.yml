@@ -10,10 +10,6 @@ cache:
 
 before_script:
   - pip --cache-dir=.pip install -r requirements.txt
-  - mkdir -p ~/.ssh
-  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-  - chmod 600 ~/.ssh/id_rsa
-  - ssh-keyscan -H '167.99.210.104' >> ~/.ssh/known_hosts
 
 stages:
   - test
@@ -28,6 +24,10 @@ deploy:
   stage: deploy
   type: deploy
   script:
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H '167.99.210.104' >> ~/.ssh/known_hosts
     - git push dokku@167.99.210.104:autormtk master
   only:
     - master
