@@ -12,7 +12,7 @@ def main():
         TKResponder()
     ]
 
-    for comment in reddit.client().subreddit('rmtk').stream.comments():
+    for comment in reddit.client().subreddit('rmtk').stream.comments().replace_more(limit=0):
         try:
             comment.refresh()
         except Exception as e:
