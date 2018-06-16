@@ -51,6 +51,9 @@ class TestStemmingHelper(VCRTestCase):
             'M0284': 0,
             'M0285': 1
         })
+    
+    def test_find_kamerstuk_submission(self):
+        self.assertEqual('8m3sph', StemmingHelper.find_kamerstuk_submission('M0311').id)
 
     def test_get_votes_with_none(self):
         self.assertEqual(StemmingHelper.get_votes(None), {})

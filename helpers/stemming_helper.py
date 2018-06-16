@@ -1,5 +1,8 @@
 import re
 
+import reddit
+import submission_types
+
 class StemmingHelper(object):
     @staticmethod
     def get_format(body: str) -> set:
@@ -40,3 +43,10 @@ class StemmingHelper(object):
         votes = [[vote.group(1).upper(), StemmingHelper.vote_value(vote.group(2))] for vote in votes if vote != None]
 
         return dict(votes)
+
+    def find_kamerstuk_submission(kamerstuk: str):
+        return next(
+            (s for s in reddit.client().subreddit('rmtk').search(kamerstuk)
+                if s.link_flair_text in [submission_types.MOTIE, submission_types.WETSVOORSTEL]),
+            None
+        )
