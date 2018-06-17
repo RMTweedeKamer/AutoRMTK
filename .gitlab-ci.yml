@@ -18,7 +18,7 @@ stages:
 test:
   stage: test
   script:
-    - [[ "$(git log -1 --pretty=%B)" == *"clean cache"* ]] && rm tests/cassettes/*.yaml tests/*/cassettes/*.yaml
+    - "[[ \"$(git log -1 --pretty=%B)\" == *\"clean cache\"* ]] && rm tests/cassettes/*.yaml tests/*/cassettes/*.yaml"
     - python -munittest tests/*.py tests/*/*.py
 
 deploy:
