@@ -41,14 +41,14 @@ class ResultatenSubmisser():
         binary_results = {voteable: self.decide_if_through(counted_votes) for voteable, counted_votes in votes.items()}
 
         return {
-          'template': 'resultaten',
-          'title': 'Resultaten ' + stemming.title,
-          'flair': submission_types.UITSLAGEN,
-          'invalid_votes': len(user_votes) - len(valid_user_votes),
-          'opkomst_percentage': int(round((100 * len(valid_user_votes) / self.kamerleden_amount(stemming.link_flair_text)))),
-          'binary_results': binary_results,
-          'results': votes,
-          'date': datetime.utcfromtimestamp(stemming.created_utc).strftime('%d-%m-%Y')
+            'template': 'resultaten',
+            'title': 'Resultaten ' + stemming.title,
+            'flair': submission_types.UITSLAGEN,
+            'invalid_votes': len(user_votes) - len(valid_user_votes),
+            'opkomst_percentage': int(round((100 * len(valid_user_votes) / self.kamerleden_amount(stemming.link_flair_text)))),
+            'results': votes,
+            'date': datetime.utcfromtimestamp(stemming.created_utc).strftime('%d-%m-%Y'),
+            'submissions': {v: StemmingHelper.find_kamerstuk_submission(v) for v in voteables}
         }
 
     def comment_valid(self, comment: Comment):
