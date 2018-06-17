@@ -20,7 +20,7 @@ class TestResultatenSubmisser(VCRTestCase):
                 'results': {
                     'W0124': {-1: 0, 0: 0, 1: 7}
                 },
-                'date': '28-05-2018'
+                'date': '27-05-2018'
             }
         )
 
@@ -40,7 +40,7 @@ class TestResultatenSubmisser(VCRTestCase):
                     'M0310': {-1: 7, 0: 1, 1: 16},
                     'M0311': {-1: 8, 0: 0, 1: 16}
                 },
-                'date': '28-05-2018'
+                'date': '27-05-2018'
             }
         )
 

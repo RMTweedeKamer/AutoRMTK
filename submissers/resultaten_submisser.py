@@ -48,7 +48,7 @@ class ResultatenSubmisser():
           'opkomst_percentage': int(round((100 * len(valid_user_votes) / self.kamerleden_amount(stemming.link_flair_text)))),
           'binary_results': binary_results,
           'results': votes,
-          'date': datetime.utcfromtimestamp(stemming.created).strftime('%d-%m-%Y')
+          'date': datetime.utcfromtimestamp(stemming.created_utc).strftime('%d-%m-%Y')
         }
 
     def comment_valid(self, comment: Comment):
