@@ -4,6 +4,7 @@ import reddit
 from vcr_unittest import VCRTestCase
 
 from submissers import ResultatenSubmisser
+from praw.models import Submission
 
 class TestResultatenSubmisser(VCRTestCase):
     def test_submiss1(self):
@@ -16,17 +17,17 @@ class TestResultatenSubmisser(VCRTestCase):
                 'flair': 'UITSLAGEN',
                 'invalid_votes': 0,
                 'opkomst_percentage': 88,
-                'binary_results': {'W0124': True},
                 'results': {
                     'W0124': {-1: 0, 0: 0, 1: 7}
                 },
-                'date': '27-05-2018'
+                'date': '27-05-2018',
+                'submissions': {'W0124': Submission(reddit.client(), id='8b6nkk')},
             }
         )
 
     def test_submiss2(self):
         stemming = reddit.client().submission(id='8mj3f6')
-        self.assertDictContainsSubset(
+        self.assertDictEqual(
             ResultatenSubmisser().submiss(stemming),
             {
                 'template': 'resultaten',
@@ -34,13 +35,13 @@ class TestResultatenSubmisser(VCRTestCase):
                 'flair': 'UITSLAGEN',
                 'invalid_votes': 0,
                 'opkomst_percentage': 96,
-                'binary_results': {'M0309': True, 'M0310': True, 'M0311': True},
                 'results': {
                     'M0309': {-1: 2, 0: 0, 1: 22},
                     'M0310': {-1: 7, 0: 1, 1: 16},
                     'M0311': {-1: 8, 0: 0, 1: 16}
                 },
-                'date': '27-05-2018'
+                'date': '27-05-2018',
+                'submissions': {'M0309': None, 'M0310': None, 'M0311': Submission(reddit.client(), id='8m3sph')},
             }
         )
 
