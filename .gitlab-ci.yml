@@ -19,6 +19,7 @@ test:
   stage: test
   script:
     - python -munittest tests/*.py tests/*/*.py
+    - rm tests/cassettes/*.yaml tests/*/cassettes/*.yaml
 
 deploy:
   stage: deploy
