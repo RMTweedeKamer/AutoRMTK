@@ -23,7 +23,6 @@ def main():
 
             if isinstance(comment, MoreComments):
                 continue
-
             if comment.body and ("meta" in comment.body.lower() or comment.body == '[deleted]'):
                 continue
             if [1 for c in comment.replies.list() if c and c.author and c.author.name == 'AutoRMTK']:
