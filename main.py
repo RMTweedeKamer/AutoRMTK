@@ -34,7 +34,7 @@ def main():
             [responder.respond(comment) for responder in responders] if response != None]
 
             if len(responses) < 1:
-            continue
+                continue
 
             rendered_responses = [
             Template(open('templates/responses/' + r['template'] + '.md').read()).render(r)
