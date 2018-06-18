@@ -1,12 +1,13 @@
 import unittest
 import submission_types
 import reddit
-from vcr_unittest import VCRTestCase
+import vcr
 
 from submissers import ResultatenSubmisser
 from praw.models import Submission
 
-class TestResultatenSubmisser(VCRTestCase):
+class TestResultatenSubmisser(unittest.TestCase):
+    @vcr.use_cassette('tests/cassettes/submissers/resultaten_submisser.test_submiss1.yml', record_mode='new_episodes')
     def test_submiss1(self):
         stemming = reddit.client().submission(id='8mj4nz')
         self.assertDictEqual(
@@ -25,6 +26,7 @@ class TestResultatenSubmisser(VCRTestCase):
             }
         )
 
+    @vcr.use_cassette('tests/cassettes/submissers/resultaten_submisser.test_submiss2.yml', record_mode='new_episodes')
     def test_submiss2(self):
         stemming = reddit.client().submission(id='8mj3f6')
         self.assertDictEqual(
@@ -45,6 +47,7 @@ class TestResultatenSubmisser(VCRTestCase):
             }
         )
 
+    @vcr.use_cassette('tests/cassettes/submissers/resultaten_submisser.test_dif1.yml', record_mode='new_episodes')
     def test_decide_if_through1(self):
         self.assertFalse(
             ResultatenSubmisser().decide_if_through(
@@ -52,6 +55,7 @@ class TestResultatenSubmisser(VCRTestCase):
             )
         )
 
+    @vcr.use_cassette('tests/cassettes/submissers/resultaten_submisser.test_dif2.yml', record_mode='new_episodes')
     def test_decide_if_through2(self):
         self.assertFalse(
             ResultatenSubmisser().decide_if_through(
@@ -59,6 +63,8 @@ class TestResultatenSubmisser(VCRTestCase):
             )
         )
 
+
+    @vcr.use_cassette('tests/cassettes/submissers/resultaten_submisser.test_dif3.yml', record_mode='new_episodes')
     def test_decide_if_through3(self):
         self.assertTrue(
             ResultatenSubmisser().decide_if_through(
