@@ -2,7 +2,7 @@ image: python:3.6.5
 
 cache:
   paths:
-    - tests/cassettes
+    - tests/vcr
     - .pip
 
 before_script:
