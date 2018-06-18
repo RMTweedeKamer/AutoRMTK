@@ -3,9 +3,6 @@ image: python:3.6.5
 cache:
   paths:
     - tests/cassettes
-    - tests/helpers/cassettes
-    - tests/responders/cassettes
-    - tests/submissers/cassettes
     - .pip
 
 before_script:
