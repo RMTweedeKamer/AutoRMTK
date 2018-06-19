@@ -1,1 +1,1 @@
-web: python main.py
+web: "while true; do python main.py; done;"
