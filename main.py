@@ -25,7 +25,7 @@ def main():
                 continue
             if comment.body and ("meta" in comment.body.lower() or comment.body == '[deleted]'):
                 continue
-            if [1 for c in comment.replies.list() if c and c.author and c.author.name == 'AutoRMTK']:
+            if [1 for c in comment.replies.list() if c and not isinstance(c, MoreComments) and c.author and c.author.name == 'AutoRMTK']:
                 continue
             if comment.author and comment.author.name in ['AutoRMTK', 'AutoModerator']:
                 continue
