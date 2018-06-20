@@ -58,6 +58,7 @@ def main():
 
 if __name__ == "__main__":
     try:
+        print('App started!')
         main()
     except Exception as e:
         client = Client(os.getenv('SENTRY_URL'))
