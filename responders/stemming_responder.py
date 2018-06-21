@@ -1,6 +1,6 @@
 from responders.responder import Responder
 from helpers.stemming_helper import StemmingHelper
-from praw.models import Comment, Submission
+from praw.models import Comment, Submission, MoreComments
 import re
 import submission_types
 
@@ -8,7 +8,7 @@ class StemmingResponder(Responder):
     def should_respond(self, comment: Comment) -> bool:
         if not isinstance(comment.parent(), Submission):
             return False
-        if len([1 for c in comment.replies.list() if "meta" in c.body.lower()]) > 0:
+        if len([1 for c in comment.replies.list() if not isinstance(c, MoreComments) and "meta" in c.body.lower()]) > 0:
             return False
         if not re.findall(r'([A-Z]{1,2}[0-9]{4}\-?[A-Za-z0-9]*\:\ *\w+)', comment.body or ""):
             return False
