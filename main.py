@@ -25,8 +25,7 @@ def main():
                 continue
             if comment.body and ("meta" in comment.body.lower() or comment.body == '[deleted]'):
                 continue
-            if [1 for c in comment.replies.list() if c and not isinstance(c, MoreComments) and c.author and c.author.name == 'AutoRMTK']:
-                continue
+
             if comment.author and comment.author.name in ['AutoRMTK', 'AutoModerator']:
                 continue
 
@@ -45,7 +44,12 @@ def main():
 
             debug_permalink = comment.permalink
 
-            comment.reply(response_text)
+            prev = [c for c in comment.replies.list() if c and not isinstance(c, MoreComments) and c.author and c.author.name == 'AutoRMTK']
+            
+            if prev:
+                prev[0].edit(response_text)
+            else:
+                comment.reply(response_text)
         except Exception as e:
             print(e)
             print('*****')
