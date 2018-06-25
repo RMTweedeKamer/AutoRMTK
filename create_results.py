@@ -9,11 +9,12 @@ def main():
 
   text = Template(open('templates/submissions/resultaten.md').read()).render(results)
 
-  reddit.client().subreddit('autormtk').submit(results['title'], text)
+  reddit.client().subreddit(sys.argv[2]).submit(results['title'], text)
 
 if __name__ == "__main__":
     try:
         print(sys.argv[1])
+        print(sys.argv[2])
         main()
     except Exception as e:
         from raven import Client

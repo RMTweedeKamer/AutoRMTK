@@ -1,10 +1,11 @@
 from praw.models import Submission, Comment
-from responders import StemmingResponder
+from responders import StemmingResponder, TKResponder, EKResponder
 from helpers import StemmingHelper
 from datetime import datetime
 import re
 import submission_types
 from helpers import KamerledenHelper
+import submission_types
 
 class ResultatenSubmisser():
     def kamerstuk_submission(title):
@@ -17,6 +18,8 @@ class ResultatenSubmisser():
             return len(KamerledenHelper.eerste_kamerleden())
         elif flair == submission_types.TK_STEMMING:
             return len(KamerledenHelper.tweede_kamerleden())
+        else:
+            raise ValueError
 
     def decide_if_through(self, counted_votes: dict) -> bool:
         return counted_votes[1] > counted_votes[-1]
@@ -33,6 +36,8 @@ class ResultatenSubmisser():
         parsed_user_votes = [
           StemmingHelper.get_votes(vuv.body) for vuv in valid_user_votes
         ]
+
+        print({ vuv.body: [StemmingHelper.get_votes(vuv.body), vuv.id] for vuv in valid_user_votes })
 
         for vote in parsed_user_votes:
             for voteable, vote_value in vote.items():
@@ -52,4 +57,4 @@ class ResultatenSubmisser():
         }
 
     def comment_valid(self, comment: Comment):
-        return StemmingResponder().respond(comment) == None
+        return [None, None, None] == [r.respond(comment) for r in [StemmingResponder(), TKResponder(), EKResponder()]]
